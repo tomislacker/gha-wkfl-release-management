@@ -39,12 +39,13 @@ Release-please's configuration (`release-please-config.json`, `.release-please-m
 repository; this workflow only passes their paths through, so consumers keep full access to release-please's own
 options.
 
-This repository's own configuration starts the manifest at `{".": "0.0.0"}` and sets exactly one pre-1.0 option,
-`bump-minor-pre-major: true`. The companion option that would demote `feat:` to a patch bump while below `1.0.0` is
-deliberately left unset. The result while the version is below `1.0.0`:
+This repository's own configuration starts the manifest at `{".": "0.0.0"}` with `initial-version: "0.1.0"` and sets
+exactly one pre-1.0 bump option, `bump-minor-pre-major: true`. The companion option that would demote `feat:` to a
+patch bump while below `1.0.0` is deliberately left unset. `initial-version` is required because a manifest version
+with no matching tag does not count as a previous release: without it, release-please falls back to its default
+initial version of `1.0.0`. The result while the version is below `1.0.0`:
 
-- `feat:` → minor, so the first release from the `0.0.0` manifest is `0.1.0`, tagged `v0.1.0`, with floating tags `v0`
-  and `v0.1`.
+- The first release is `0.1.0`, tagged `v0.1.0`, with floating tags `v0` and `v0.1`; after that, `feat:` → minor.
 - `fix:` → patch.
 - `!` / `BREAKING CHANGE:` → **minor**, not major. The major stays at `0` until the interface is promoted by hand.
 
