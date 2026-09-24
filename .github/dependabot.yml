@@ -1,0 +1,35 @@
+---
+# Dependabot configuration.
+# Options reference:
+# https://docs.github.com/code-security/dependabot/working-with-dependabot/dependabot-options-reference
+#
+# This repository ships reusable GitHub Actions workflows, so the only
+# dependency surface is the actions referenced from `.github/workflows/`.
+
+version: 2
+
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Etc/UTC"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github_actions"
+    # Conventional Commits are mandatory here: release-please parses every
+    # commit on `main`. "ci" + scope yields `ci(deps): bump actions/checkout`,
+    # which is a valid non-releasing commit type.
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    groups:
+      gha-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"

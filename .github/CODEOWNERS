@@ -1,0 +1,13 @@
+# CODEOWNERS
+#
+# Anyone listed here is automatically requested for review when a pull
+# request changes a file they own. Ownership is also what lets branch
+# protection enforce "Require review from Code Owners" on `main`.
+#
+# Syntax reference:
+# https://docs.github.com/articles/about-code-owners
+#
+# Later rules win: a more specific path listed below would override the
+# catch-all. Today there is exactly one owner for the whole repository.
+
+* @tomislacker

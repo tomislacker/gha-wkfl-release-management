@@ -1,0 +1,109 @@
+---
+# Declarative issue/PR labels, applied by crazy-max/ghaction-github-labeler@v6.
+# https://github.com/crazy-max/ghaction-github-labeler
+#
+# Schema per entry: name, color (6 hex digits, no leading '#'), description,
+# and optionally from_name to rename an existing label without losing it.
+#
+# WARNING: the labeler deletes labels that are absent from this file unless
+# `skip-delete` is set. The `autorelease: *` labels below are owned by
+# release-please - removing them from this file breaks release automation.
+
+# --- Issue triage -----------------------------------------------------------
+
+- name: "bug"
+  color: "d73a4a"
+  description: "Something is not working"
+
+- name: "enhancement"
+  color: "a2eeef"
+  description: "New feature or request"
+
+- name: "documentation"
+  color: "0075ca"
+  description: "Improvements or additions to documentation"
+
+- name: "question"
+  color: "d876e3"
+  description: "Further information is requested"
+
+- name: "duplicate"
+  color: "cfd3d7"
+  description: "This issue or pull request already exists"
+
+- name: "invalid"
+  color: "e4e669"
+  description: "This does not seem right"
+
+- name: "wontfix"
+  color: "ffffff"
+  description: "This will not be worked on"
+
+- name: "good first issue"
+  color: "7057ff"
+  description: "Good for newcomers"
+
+- name: "help wanted"
+  color: "008672"
+  description: "Extra attention is needed"
+
+# --- Change classification (mirrors Conventional Commit types) ---------------
+
+- name: "chore"
+  color: "ededed"
+  description: "Maintenance that does not change behavior"
+
+- name: "refactor"
+  color: "bfd4f2"
+  description: "Code change that neither fixes a bug nor adds a feature"
+
+- name: "test"
+  color: "d4c5f9"
+  description: "Adds or corrects tests"
+
+- name: "ci"
+  color: "bfdadc"
+  description: "Changes to CI configuration and workflows"
+
+- name: "breaking-change"
+  color: "d93f0b"
+  description: "Requires a major version bump"
+
+- name: "security"
+  color: "e11d21"
+  description: "Security fix or hardening"
+
+# --- Dependabot --------------------------------------------------------------
+# These two names and colors match what Dependabot creates on its own.
+
+- name: "dependencies"
+  color: "0366d6"
+  description: "Dependency updates"
+
+- name: "github_actions"
+  color: "000000"
+  description: "Updates to GitHub Actions dependencies"
+
+# --- release-please (managed automatically - do not delete) ------------------
+# release-please applies and looks for these names itself; dropping one from
+# this file lets the labeler delete it and breaks the release automation.
+
+- name: "autorelease: pending"
+  color: "c2e0c6"
+  description: "Managed by release-please: release PR awaiting merge"
+
+- name: "autorelease: tagged"
+  color: "0e8a16"
+  description: "Managed by release-please: release has been tagged"
+
+- name: "autorelease: published"
+  color: "0e8a16"
+  description: "Managed by release-please: GitHub release has been published"
+
+- name: "autorelease: snapshot"
+  color: "006b75"
+  description: "Managed by release-please: snapshot release PR"
+
+- name: "autorelease: snooze"
+  color: "fbca04"
+  description: "Applied by hand to pause release-please on a release PR"
