@@ -20,3 +20,48 @@ jobs:
       contents: write # create the release and force-push the floating tags
       pull-requests: write # open and update the release PR
     uses: ./.github/workflows/release-management.yml
+
+  # After a release, republish the README usage examples with the literal
+  # commit SHA and tag of that release, via a pull request (main is protected).
+  readme-pins:
+    needs: release
+    if: needs.release.outputs.release_created == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # push the update branch
+      pull-requests: write # open the pull request and enable auto-merge
+    env:
+      TAG: ${{ needs.release.outputs.tag_name }}
+      BRANCH: docs/readme-pins
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Update the README pins and open a pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git fetch --no-tags origin "refs/tags/$TAG:refs/tags/$TAG"
+          SHA="$(git rev-parse "refs/tags/$TAG^{commit}")"
+          export SHA
+          ./scripts/update-readme-pins.sh
+          if git diff --quiet -- README.md; then
+            echo "README pins already current"
+            exit 0
+          fi
+          # Runner-local identity for the automation commit; commits made here
+          # are attributed to the github-actions bot, like release-please's.
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH"
+          git add README.md
+          git commit -m "docs: pin usage examples to $TAG"
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+          if [ "$(gh pr list --head "$BRANCH" --state open --json number --jq length)" = "0" ]; then
+            gh pr create --head "$BRANCH" \
+              --title "docs: pin usage examples to $TAG" \
+              --body "Automated update of the README usage examples to the $TAG release SHA."
+          fi
+          # Merges itself once the required checks pass; the CI runs on this
+          # bot-opened PR still need the one-click maintainer approval first.
+          gh pr merge --auto --squash "$BRANCH"
