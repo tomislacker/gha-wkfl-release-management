@@ -367,8 +367,9 @@ Tell them what it was for, or do not — either way it is worth more there than 
 [contributors-badge]: https://contrib.rocks/image?repo=tomislacker/gha-wkfl-release-management
 [contributors]: https://github.com/tomislacker/gha-wkfl-release-management/graphs/contributors
 
-(A [repobeats](https://repobeats.axiom.co/) activity graph could be added here later; it requires signing up for an
-account, so it is deliberately not wired up yet.)
+![Repobeats analytics][repobeats]
+
+[repobeats]: https://repobeats.axiom.co/api/embed/1cd41dfdb700f91bdd3ff1cd6902e404c2ed7357.svg
 
 ## License
 
