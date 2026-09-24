@@ -1,0 +1,37 @@
+---
+# markdownlint-cli configuration. Keep in step with .yamllint.yaml: the
+# repository-wide line-length policy is 120 columns.
+default: true
+
+# MD013/line-length - 120 columns for prose; code blocks, tables and long
+# reference links (badges) are exempt because they cannot be wrapped.
+MD013:
+  line_length: 120
+  heading_line_length: 120
+  code_block_line_length: 120
+  code_blocks: false
+  tables: false
+  headings: true
+  strict: false
+  stern: false
+
+# MD024/no-duplicate-heading - release-please CHANGELOGs legitimately repeat
+# headings such as "### Features" under each version.
+MD024:
+  siblings_only: true
+
+# MD033/no-inline-html - README badges and centred contributor blocks need
+# raw HTML (<img>, <div align="center">, <details>).
+MD033: false
+
+# MD041/first-line-heading - kept enabled: every document in this repository
+# starts with a level-1 heading, badges follow it.
+MD041: true
+
+# MD046/code-block-style - fenced blocks everywhere.
+MD046:
+  style: fenced
+
+# MD048/code-fence-style - backticks, never tildes.
+MD048:
+  style: backtick

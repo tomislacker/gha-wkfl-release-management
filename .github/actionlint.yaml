@@ -1,0 +1,18 @@
+---
+# GitHub added `job.workflow_sha` and `job.workflow_repository` in September 2026 so
+# that a reusable workflow can identify its own source commit. actionlint v1.7.12
+# predates them and still models the `job` context without those properties, so it
+# reports both as undefined. release-management.yml needs them to check its scripts
+# out at the exact commit the caller pinned, and validates them fail-closed first.
+#
+# Caveat worth remembering when this is relaxed: neither property exists on GitHub
+# Enterprise Server, where the validation step will (deliberately) fail the job.
+#
+# Suppress only these two properties on only that workflow -- the object type in the
+# pattern pins the match to the `job` context, so an unrelated typo still surfaces.
+# https://github.blog/changelog/
+paths:
+  .github/workflows/release-management.yml:
+    ignore:
+      - '^property "workflow_repository" is not defined in object type \{check_run_id:'
+      - '^property "workflow_sha" is not defined in object type \{check_run_id:'

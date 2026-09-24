@@ -1,0 +1,29 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+max_line_length = 120
+
+# Markdown uses two trailing spaces as a hard line break, so trailing
+# whitespace must survive.
+[*.md]
+trim_trailing_whitespace = false
+
+# Matches the shfmt arguments in .pre-commit-config.yaml (-i 2 -ci).
+[*.{sh,bash,bats}]
+indent_size = 2
+
+[*.{yml,yaml,json,jsonc}]
+indent_size = 2
+
+[Makefile]
+indent_style = tab
+
+[*.{diff,patch}]
+trim_trailing_whitespace = false
+insert_final_newline = false
