@@ -296,6 +296,7 @@ and if you are changing something significant, add a new ADR rather than editing
 | [0004](docs/adrs/0004-reusable-workflow-plus-composite-action.md) | Ship a reusable workflow and a composite action |
 | [0005](docs/adrs/0005-sha-pin-third-party-actions.md) | SHA-pin third-party actions |
 | [0006](docs/adrs/0006-conventional-commits-enforced.md) | Enforce conventional commits |
+| [0007](docs/adrs/0007-agent-rules-single-sourced-in-agents-md.md) | Agent rules are single-sourced in AGENTS.md |
 
 ## Donations
 

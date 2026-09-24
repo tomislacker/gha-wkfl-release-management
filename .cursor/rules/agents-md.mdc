@@ -1,0 +1,14 @@
+---
+description: Repository agent rules — AGENTS.md is the single source of truth
+alwaysApply: true
+---
+
+Read and follow @AGENTS.md before making any change in this repository. It is the authoritative rule set:
+
+- SHA-pin every third-party action (`uses: owner/action@<40-char-sha> # vX.Y.Z`) — ADR 0005
+- Conventional commits on every commit and PR title; clean history — ADR 0006
+- Lint gates: `pre-commit run --all-files` and `bats tests/` must pass before committing
+- Never create, move, or delete tags by hand; the workflow owns all tags — ADR 0003
+- Never interpolate `${{ }}` into a workflow `run:` body; pass values via `env:`
+
+Do not add rules to this file; add them to AGENTS.md so every tool sees the same guidance (ADR 0007).
