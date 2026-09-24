@@ -30,7 +30,7 @@ the same workflow run. The floating-tag half is also published standalone as a c
 | `scripts/compute-floating-tags.sh` | Pure string logic: `v1.2.3` → `major=v1`, `minor=v1.2`. No git, no network. |
 | `scripts/move-floating-tags.sh` | Fetches the release tag, force-moves both floating tags, pushes them atomically. |
 | `scripts/update-readme-pins.sh` | Rewrites README usage examples with the latest release SHA; run by `release.yml`. |
-| `tests/` | [bats](https://bats-core.readthedocs.io/) unit tests for `scripts/` — 63 of them across two files. |
+| `tests/` | [bats](https://bats-core.readthedocs.io/) unit tests, one suite per script in `scripts/`. |
 | `docs/adrs/` | Architecture decision records, MADR-lite, numbered. |
 | `release-please-config.json`, `.release-please-manifest.json` | This repository's own release-please config. |
 | `SECURITY.md` | Vulnerability reporting, tag-yank policy, consumer trust boundaries. |
