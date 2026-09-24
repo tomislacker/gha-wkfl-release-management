@@ -1,0 +1,57 @@
+---
+# Standalone composite action: move the floating major/minor tags onto a
+# release tag.
+#
+# Requirements in the calling job:
+#   * The repository that owns the tags must already be checked out with
+#     push-capable credentials -- i.e. actions/checkout with its default
+#     persist-credentials: true, or an explicitly configured token/deploy key.
+#   * The job (or workflow) must grant `permissions: contents: write`.
+#
+# The action runs in the current working directory, so check the target
+# repository out there (or set a working directory before calling it).
+name: Floating semver tags
+author: tomislacker
+description: >-
+  Force-move floating major and minor tags (v1, v1.2) onto the commit that a
+  full release tag (v1.2.3) points at, then push them.
+
+branding:
+  icon: tag
+  color: blue
+
+inputs:
+  tag:
+    description: Full release tag to derive the floating tags from, e.g. v1.2.3.
+    required: true
+  remote:
+    description: >-
+      Git remote to fetch the release tag from and push the floating tags to.
+      MUST be a trusted static value -- never a workflow input, branch name, or
+      anything else an untrusted contributor can influence. The script rejects
+      option-shaped remotes as defense in depth, but do not rely on that.
+    required: false
+    default: origin
+  dry-run:
+    description: >-
+      When "true", inspect the remote and log which floating tags would move,
+      making no local or remote changes at all. "yes"/"1" are tolerated as
+      synonyms and "false"/"no"/"0" disable it; any other value is an error.
+    required: false
+    default: "false"
+
+runs:
+  using: composite
+  steps:
+    - name: Move floating tags
+      shell: bash
+      env:
+        # Never interpolate expressions directly into the script body; every
+        # dynamic value arrives as an environment variable.
+        ACTION_PATH: ${{ github.action_path }}
+        TAG: ${{ inputs.tag }}
+        REMOTE: ${{ inputs.remote }}
+        DRY_RUN: ${{ inputs.dry-run }}
+      # Invoked through bash explicitly, rather than trusting the executable bit
+      # to survive however the action's files were extracted onto the runner.
+      run: bash "$ACTION_PATH/scripts/move-floating-tags.sh"

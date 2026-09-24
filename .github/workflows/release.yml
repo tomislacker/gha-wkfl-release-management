@@ -1,0 +1,22 @@
+---
+# Dogfooding: this repository releases itself with its own reusable workflow,
+# referenced locally so the run always exercises the current commit.
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+# Least privilege: nothing is granted by default, only the release job asks.
+permissions: {}
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    permissions:
+      contents: write # create the release and force-push the floating tags
+      pull-requests: write # open and update the release PR
+    uses: ./.github/workflows/release-management.yml
