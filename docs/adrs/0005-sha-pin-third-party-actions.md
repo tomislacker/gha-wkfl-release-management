@@ -69,7 +69,8 @@ Three references are not full SHA pins. Each is accepted knowingly rather than o
 2. **`pre-commit` hook `rev:` entries are version tags, not SHAs.** That is the pre-commit convention and what
    `pre-commit autoupdate` writes; SHA-pinning them makes updates manual and unreadable for no gain on a tool that
    runs on a developer machine and in a read-only CI job. Hook environments are also cached by config hash, so a
-   retagged upstream shows up as a cache miss.
+   retagged upstream shows up as a cache miss. Updates are proposed automatically: the weekly
+   `Pre-commit Autoupdate` workflow runs `pre-commit autoupdate` and opens a pull request when revisions move.
 3. **`bats` is pinned by version, not SHA.** `bats-core/bats-action` itself is SHA-pinned, but the interpreter it
    installs is selected by its `bats-version: "1.14.0"` input, which is a version string by design.
 

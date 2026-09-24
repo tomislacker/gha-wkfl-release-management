@@ -273,6 +273,10 @@ value.
 Contributions are welcome. **By contributing you agree that your contribution is licensed under Apache-2.0**, the same
 licence as this project (inbound = outbound, per section 5 of the licence). You retain copyright of your work.
 
+`main` is protected by a repository ruleset: every change lands through a pull request, and all four CI checks
+(`pre-commit`, `bats tests`, `Commit messages`, `Pull request title`) must pass before merging. There is no bypass —
+this applies to the maintainer too.
+
 ### Development setup
 
 ```sh
