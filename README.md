@@ -59,10 +59,12 @@ another workflow, so a separate `on: push: tags` workflow would never fire. See
 
 ## Usage
 
-> **Pin every example to a commit SHA.** The snippets below use `<commit-sha>` as a placeholder. Replace it with the
-> commit SHA of the [latest release](https://github.com/tomislacker/gha-wkfl-release-management/releases/latest) and
-> keep the trailing comment naming the tag that SHA corresponds to, so the reference stays readable and auditable.
-> Dependabot understands this format and will bump both the SHA and the comment.
+> **The snippets below are pinned to the [latest release][latest] for you** — after each release, the release
+> workflow rewrites them with that release's literal commit SHA (`scripts/update-readme-pins.sh`), so they are
+> copy-paste ready. Keep the trailing comment naming the tag when you take them: the reference stays readable and
+> auditable, and Dependabot understands the format and will bump both the SHA and the comment.
+
+[latest]: https://github.com/tomislacker/gha-wkfl-release-management/releases/latest
 
 ### Reusable workflow
 
@@ -79,7 +81,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   release:
-    uses: tomislacker/gha-wkfl-release-management/.github/workflows/release-management.yml@<commit-sha> # vX.Y.Z
+    uses: tomislacker/gha-wkfl-release-management/.github/workflows/release-management.yml@93c3b6b615219c9a1588a643af62b2f63e7695ad # v0.1.0
 ```
 
 The reusable workflow deliberately sets no `concurrency` of its own — serialising release runs is the caller's
@@ -124,8 +126,8 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@<commit-sha> # v7.0.1
-      - uses: tomislacker/gha-wkfl-release-management@<commit-sha> # vX.Y.Z
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: tomislacker/gha-wkfl-release-management@93c3b6b615219c9a1588a643af62b2f63e7695ad # v0.1.0
         with:
           tag: ${{ github.ref_name }}
 ```
@@ -249,7 +251,7 @@ To get CI on release pull requests, pass a token that is not `GITHUB_TOKEN`:
 ```yaml
 jobs:
   release:
-    uses: tomislacker/gha-wkfl-release-management/.github/workflows/release-management.yml@<commit-sha> # vX.Y.Z
+    uses: tomislacker/gha-wkfl-release-management/.github/workflows/release-management.yml@93c3b6b615219c9a1588a643af62b2f63e7695ad # v0.1.0
     secrets:
       token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
 ```
