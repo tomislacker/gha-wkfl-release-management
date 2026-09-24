@@ -18,6 +18,7 @@ the same workflow run. The floating-tag half is also published standalone as a c
 | `.github/workflows/release.yml` | Dogfooding: push to `main` calls the local reusable workflow. |
 | `.github/workflows/ci.yml` | `pre-commit`, bats, commitlint, and the pull-request-title check. |
 | `.github/workflows/labels.yml`, `.github/labels.yml` | Declarative label sync. |
+| `.github/workflows/pre-commit-autoupdate.yml` | Weekly `pre-commit autoupdate` PR (Dependabot has no pre-commit ecosystem). |
 | `.github/dependabot.yml`, `.github/CODEOWNERS` | Action pin updates; review ownership. |
 | `.github/PULL_REQUEST_TEMPLATE.md` | Pull request checklist. |
 | `.github/actionlint.yaml` | actionlint suppressions, currently the `job.workflow_*` properties it does not know. |
