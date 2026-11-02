@@ -81,7 +81,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   release:
-    uses: tomislacker/gha-wkfl-release-management/.github/workflows/release-management.yml@93c3b6b615219c9a1588a643af62b2f63e7695ad # v0.1.0
+    uses: tomislacker/gha-wkfl-release-management/.github/workflows/release-management.yml@b1b3ac1e8b8123ef082b46a6dde5b5615e8ce01f # v0.1.1
 ```
 
 The reusable workflow deliberately sets no `concurrency` of its own — serialising release runs is the caller's
@@ -127,7 +127,7 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: tomislacker/gha-wkfl-release-management@93c3b6b615219c9a1588a643af62b2f63e7695ad # v0.1.0
+      - uses: tomislacker/gha-wkfl-release-management@b1b3ac1e8b8123ef082b46a6dde5b5615e8ce01f # v0.1.1
         with:
           tag: ${{ github.ref_name }}
 ```
@@ -251,7 +251,7 @@ To get CI on release pull requests, pass a token that is not `GITHUB_TOKEN`:
 ```yaml
 jobs:
   release:
-    uses: tomislacker/gha-wkfl-release-management/.github/workflows/release-management.yml@93c3b6b615219c9a1588a643af62b2f63e7695ad # v0.1.0
+    uses: tomislacker/gha-wkfl-release-management/.github/workflows/release-management.yml@b1b3ac1e8b8123ef082b46a6dde5b5615e8ce01f # v0.1.1
     secrets:
       token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
 ```
