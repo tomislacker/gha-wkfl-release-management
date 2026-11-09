@@ -38,7 +38,7 @@ jobs:
       # cannot change CI behaviour on its own; the helper libraries are all
       # switched off because no test in tests/ loads one.
       - name: Install bats
-        uses: bats-core/bats-action@77d6fb60505b4d0d1d73e48bd035b55074bbfb43 # 4.0.0
+        uses: bats-core/bats-action@3566550e0f594451ac0f58fcbfdeca93aa29a45e # 4.1.0
         with:
           bats-version: "1.14.0"
           github-token: ${{ github.token }}
@@ -82,7 +82,7 @@ jobs:
 
       # Pinned, and without the helper libraries: no test in tests/ loads one.
       - name: Install bats
-        uses: bats-core/bats-action@77d6fb60505b4d0d1d73e48bd035b55074bbfb43 # 4.0.0
+        uses: bats-core/bats-action@3566550e0f594451ac0f58fcbfdeca93aa29a45e # 4.1.0
         with:
           bats-version: "1.14.0"
           github-token: ${{ github.token }}
@@ -121,6 +121,6 @@ jobs:
       pull-requests: read
     steps:
       - name: Validate pull request title
-        uses: amannn/action-semantic-pull-request@48f256284bd46cdaab1048c3721360e808335d50 # v6.1.1
+        uses: amannn/action-semantic-pull-request@2252a14e810aa9b85c2d560bd7070c802206ecf6 # v6.1.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
